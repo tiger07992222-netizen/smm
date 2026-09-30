@@ -1,0 +1,10 @@
+aiohttp
+aiogram
+apscheduler
+httpx
+langgraph
+langchain-core
+pyyaml
+python-dotenv
+pytest
+tzdata

@@ -1,0 +1,26 @@
+# tg_smm бот — отдельно от ClickHouse на том же хосте.
+# Лимиты: 1 CPU, 1G RAM, ~3G диска на volume data/
+services:
+  tg_smm:
+    build:
+      context: .
+      network: host
+    image: tg_smm:latest
+    container_name: tg_smm_bot
+    restart: unless-stopped
+    network_mode: host
+    env_file: .env
+    environment:
+      DATA_DIR: /app/data
+      TZ: Europe/Moscow
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config:ro
+    cpus: "1.0"
+    mem_limit: 1g
+    mem_reservation: 512m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
